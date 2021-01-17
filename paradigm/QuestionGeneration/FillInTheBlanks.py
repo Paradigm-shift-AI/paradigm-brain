@@ -1,8 +1,24 @@
 import random
 
-class FillInTheBlanks:
 
-    def __init__(self, processed_transcript: str):
+class FillInTheBlanks:
+    """
+    Fill in the blanks
+
+    Class to generate fill in the blanks type questions based on processed
+    transcript. Replacing the proper nouns.
+
+    Arguments:
+        processed_transcript: dict;
+    """
+
+    def __init__(self, processed_transcript: dict):
+        """
+        __init__
+
+        Arguments:
+            processed_transcript: dict
+        """
         self.processed_transcript = processed_transcript
 
     def __generate_options(self):
@@ -14,11 +30,22 @@ class FillInTheBlanks:
                 self.options.add(i['NN'])
 
     def __generate_question(self):
+        """
+        generate question
+
+
+        Option are the list of proper noun and nouns from the
+        processed_transcript. Question is generate by replacing the proper noun
+        with a blank, and putting other nouns as options.
+        """
+
         self.question = []
 
         for i in self.processed_transcript["processed-sentences"]:
-            if 'NNP' in i and len(self.options) >= 3:
+            if 'NNP' in i and len(
+                    self.options) >= 3 and i['NNP'] in self.options:
                 _qu = {}
+                _qu["type"] = 1
                 _qu["question"] = i['sentence'].replace(i['NNP'], "_____")
                 _qu["option1"] = i["NNP"]
 
@@ -39,10 +66,21 @@ class FillInTheBlanks:
 
                 self.question.append(_qu)
 
-
     def question(self):
+        """
+        Return List of FITB question:
+            {
+                "type": int
+                "question": str,
+                "option1": str,
+                "option2": str,
+                "option3": str,
+                "option4": str
+                "answer": str,
+                "score": int
+            }
+        """
         self.__generate_options()
-        print(self.options)
         self.__generate_question()
 
         return self.question
