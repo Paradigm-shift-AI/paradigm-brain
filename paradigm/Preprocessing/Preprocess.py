@@ -1,8 +1,8 @@
-import Tags
-import RankRDF
-import getSentences
-import Grammar
-import POSTag
+from . import Tags
+from . import RankRDF
+from . import GetSentences
+from . import Grammar
+from . import POSTag
 
 
 class Preprocess:
@@ -39,7 +39,7 @@ class Preprocess:
 
         self.results["processed-sentences"] = POSTag.GivePOSTags(
             Grammar.Grammar(
-                getSentences.ExtractedSentences(
+                GetSentences.ExtractedSentences(
                     self.text).get_processed_sentences()).get_processed_sentences()).get_sentences_with_tags()
 
     def get_processed_sentences(self):
