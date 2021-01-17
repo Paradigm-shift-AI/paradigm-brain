@@ -38,7 +38,6 @@ class RankRDF:
             return False
 
     def __find_intersection(self):
-        print(self.list_from_plugin)
         for tag in self.tags:
             if self.__binary_search(self.list_from_plugin, tag):
                 self.final_tags_intersection.append(tag)
