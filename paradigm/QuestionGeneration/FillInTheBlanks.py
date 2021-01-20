@@ -25,9 +25,9 @@ class FillInTheBlanks:
         self.options = set()
         for i in self.processed_transcript["processed-sentences"]:
             if 'NNP' in i:
-                self.options.add(i['NNP'])
+                self.options.update(set(i['NNP']))
             if 'NN' in i:
-                self.options.add(i['NN'])
+                self.options.update(set(i['NN']))
 
     def __generate_question(self):
         """
@@ -43,13 +43,13 @@ class FillInTheBlanks:
 
         for i in self.processed_transcript["processed-sentences"]:
             if 'NNP' in i and len(
-                    self.options) >= 3 and i['NNP'] in self.options:
+                    self.options) >= 3 and i['NNP'][0] in self.options:
                 _qu = {}
                 _qu["type"] = 1
-                _qu["question"] = i['sentence'].replace(i['NNP'], "_____")
-                _qu["option1"] = i["NNP"]
+                _qu["question"] = i['sentence'].replace(i['NNP'][0], "_____")
+                _qu["option1"] = i["NNP"][0]
 
-                self.options.remove(i["NNP"])
+                self.options.remove(i["NNP"][0])
                 _qu["option2"] = random.sample(self.options, 1)[0]
 
                 self.options.remove(_qu["option2"])

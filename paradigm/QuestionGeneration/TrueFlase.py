@@ -81,12 +81,13 @@ class TrueFalse:
 
         for i in self.processed_transcript["processed-sentences"]:
             if "JJ" in i:
-                _rep = self.__get_antonym(i['JJ'])
+                _ran = random.choice(i['JJ'])
+                _rep = self.__get_antonym(_ran)
                 if _rep:
                     _to_flip = random.choice([0, 1])
                     _ques = {}
                     if _to_flip == 1:
-                        _ques["question"] = i['sentence'].replace(i['JJ'], _rep)
+                        _ques["question"] = i['sentence'].replace(_ran, _rep)
                         _ques["answer"] = False
                     else:
                         _ques["question"] = i['sentence']

@@ -29,7 +29,9 @@ class GivePOSTags:
             _tags = TextBlob(sentence).tags
 
             for tg in _tags:
-                _temp[tg[1]] = tg[0]
+                if tg[1] not in _temp:
+                    _temp[tg[1]] = []
+                _temp[tg[1]].append(tg[0])
 
             self.sentences_with_tags.append(_temp)
 
@@ -42,7 +44,7 @@ class GivePOSTags:
                         {"sentence": <sentence>, "NNP": <NNP>}
                         All tags of the sentence in Key-Value pair
         """
-        
+
         self.__add_tags()
 
         return self.sentences_with_tags
