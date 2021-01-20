@@ -66,7 +66,7 @@ class FillInTheBlanks:
 
                 self.question.append(_qu)
 
-    def question(self):
+    def questions(self):
         """
         Return List of FITB question:
             {
