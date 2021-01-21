@@ -32,6 +32,42 @@ class MultipleCorrect:
                 _st += i
         return _st
 
+    def __generate_question_noun(self):
+        _test_list = []
+        for i in self.processed_transcript['processed-sentences']:
+            _formatted_sentence = self.__format_string(i['sentence']).split()
+
+            n = len(_formatted_sentence)
+            for _jk in range(n-2):
+
+                if 'NNP' in i:
+                    i['NN'] += i['NNP']
+                if 'NNS' in i:
+                    i['NN'] += i['NNS']
+
+                if _formatted_sentence[_jk] in i['NN'] and _formatted_sentence[_jk + 1] in i['NN'] and _formatted_sentence[_jk + 2] in i['IN'] and _formatted_sentence[_jk + 3] in i['NN']:
+                    _ques = {}
+                    _vb = copy.deepcopy(_formatted_sentence)
+
+                    _vb[_jk] = "_____"
+                    _vb[_jk + 1] = "_____"
+                    _ques['question'] = " ".join(_vb)
+                    _ques['option1'] = _formatted_sentence[_jk]
+                    _ques['option2'] = _formatted_sentence[_jk + 1]
+
+                    _ar = random.choice(i['NN'])
+                    while _ar in [_formatted_sentence[_jk], _formatted_sentence[_jk + 1]]:
+                        _ar = random.choice(i['NN'])
+
+                    _ques['option3'] = _ar
+                    _ques['option4'] = "None of the above"
+                    _ques['answer1'] = _ques['option1']
+                    _ques['answer2'] = _ques['option2']
+
+                    _ques['score'] = 2
+                    _ques['type'] = 1
+                    self.question.append(_ques)
+
 
     def __generate_question(self):
         """
@@ -54,7 +90,6 @@ class MultipleCorrect:
                         _temp_list.append(_formatted_sentence.index(j))
 
             _temp_list.sort()
-            print(_temp_list)
 
             _to_replace = []
             for k in range(1, len(_temp_list)):
@@ -128,6 +163,6 @@ class MultipleCorrect:
         }
 
         """
-
+        self.__generate_question_noun()
         self.__generate_question()
         return self.question
