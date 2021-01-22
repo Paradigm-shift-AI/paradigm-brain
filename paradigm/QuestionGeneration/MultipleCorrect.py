@@ -40,6 +40,12 @@ class MultipleCorrect:
             n = len(_formatted_sentence)
             for _jk in range(n-2):
 
+                if 'NN' not in i:
+                    i['NN'] = []
+
+                if 'IN' not in i:
+                    i['IN'] = []
+
                 if 'NNP' in i:
                     i['NN'] += i['NNP']
                 if 'NNS' in i:
@@ -88,6 +94,9 @@ class MultipleCorrect:
                 for j in i['JJ']:
                     if j in _formatted_sentence:
                         _temp_list.append(_formatted_sentence.index(j))
+
+            if 'CC' not in i:
+                i['CC'] = []
 
             _temp_list.sort()
 

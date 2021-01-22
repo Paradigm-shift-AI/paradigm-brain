@@ -38,7 +38,7 @@ class IntergerType:
                     try:
                         _ques['answer'] = w2n.word_to_num(str(_jk))
 
-                        if not isinstance(_ques['answer'], int):
+                        if not isinstance(_ques['answer'], int) or _ques['answer'] == 1:
                             raise Exception
 
                         _ques['score'] = 1
@@ -53,7 +53,7 @@ class IntergerType:
                     try:
                         _ques['answer'] = w2n.word_to_num(str(_jk))
 
-                        if not isinstance(_ques['answer'], int):
+                        if not isinstance(_ques['answer'], int) or _ques['answer'] == 1:
                             raise Exception
 
                         _ques['score'] = 1

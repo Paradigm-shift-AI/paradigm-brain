@@ -97,7 +97,8 @@ class TrueFalse:
                     self.question.append(_ques)
 
     def __generate_question(self):
-        self.__named_entity_recognition()
+        if self.tokenid:
+            self.__named_entity_recognition()
         self.__adjective_replacement()
 
     def questions(self):
