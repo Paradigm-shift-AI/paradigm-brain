@@ -43,7 +43,7 @@ class ExtractedSentences:
         Returns:
             List of strings
         """
-        
+
         self.__resolve_coreference()
         self.__tokenize_sentences()
 
