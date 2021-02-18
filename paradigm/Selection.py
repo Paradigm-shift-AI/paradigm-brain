@@ -1,8 +1,9 @@
 import random
+import operator
 
 class Selection:
 
-    def __init__(self, preprocessed_question, list_of_questions):
+    def __init__(self, preprocessed_question, list_of_questions, token=False):
         """
         list_of_questions:
         [
@@ -12,9 +13,12 @@ class Selection:
 
         self.preprocessed_question = preprocessed_question
         self.list_of_questions = list_of_questions
+        self.token = token
         self.final_question = []
 
     def __get_proper_noun(self):
+        if self.token:
+            return self.preprocessed_question["tag-intersection"]
         jk = set()
         for j in self.preprocessed_question["processed-sentences"]:
             if "NNP" in j:
@@ -25,19 +29,54 @@ class Selection:
     def __select_fill_in_blanks(self):
         for i in self.list_of_questions[1]:
             if i["answer"] in self.__get_proper_noun():
-                self.final_question.append(i)
+                insert = True
+                for k in self.final_question:
+                    if i["question"] == k["question"]:
+                        insert = False
+                        break
+                if insert:
+                    self.final_question.append(i)
 
     def __select_true_or_false(self, type):
-        for i in self.list_of_questions[type]:
-            for j in self.preprocessed_question["tag"][0:5]:
-                if j in i["question"]:
-                    self.final_question.append(i)
+        if self.token:
+            question_rank = {}
+            for i in self.list_of_questions[type]:
+                rating = 0
+                for j in self.preprocessed_question["tag-intersection"]:
+                    if str(j) in i["question"]:
+                        rating += 1
+                question_rank[i["question"]] = rating
+            sorted_tuple = sorted(question_rank.items(), key=operator.itemgetter(1), reverse=True)
+
+            for i in sorted_tuple[0:3]:
+                for j in self.list_of_questions[type]:
+                    if i[0] == j["question"]:
+                        insert = True
+                        for k in self.final_question:
+                            if j["question"] == k["question"]:
+                                insert = False
+                                break
+                        if insert:
+                            self.final_question.append(j)
+
+        else:
+            for i in self.list_of_questions[type]:
+                for j in self.preprocessed_question["tag"][0:5]:
+                    if j in i["question"]:
+                        self.final_question.append(i)
+
 
     def __select_multiple_correct(self):
         for i in self.list_of_questions[3]:
             if i["answer1"] in self.__get_proper_noun():
                 if i["answer2"] in self.__get_proper_noun():
-                    self.final_question.append(i)
+                    insert = True
+                    for k in self.final_question:
+                        if i["question"] == k["question"]:
+                            insert = False
+                            break
+                    if insert:
+                        self.final_question.append(i)
 
     def __select_relevant_question(self):
 
@@ -55,7 +94,7 @@ class Selection:
 
         if len(self.final_question) > 2:
             random.shuffle(self.final_question)
-            self.final_question = self.final_question[0:2]
+            self.final_question = self.final_question[0:3]
 
 
     def get_final_question(self):

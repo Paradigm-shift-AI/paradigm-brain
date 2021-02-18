@@ -1,0 +1,67 @@
+We can 'push' or 'pop' only one element at a time.
+All these operations that have written here can be performed
+in constant time, or in other words their time complexity
+is O(1). Remember
+an element that is pushed or inserted last on to a stack,
+is popped or removed first. So stack is called
+'last in first out' structure, what goes in last comes out first.
+'last in first out', in short is called 'LIFO'.
+Logically a stack is represented something like this:
+As a three sided figure, as a container
+open from one side. This is representation of an
+empty stack. Let's name this stack 's'. Let's say this figure
+is representing a stack of integers.
+Right now the stack is empty. I will perform push and pop operations
+to insert and remove integers from the stack.
+I will first write down the operations here and then show you
+what will happen in the logical representation. Let's first perform
+a 'push'. I want to 'push' number 2 on to the stack.
+The stack is empty right now, so we can not
+'pop' anything. After the 'push', stack will look something like this:
+There is only one integer in the stack, so of course
+its on 'top'. Let's 'push' another integer.
+This time, I want to 'push' number 10.
+And now lets say we want to perform
+a 'pop'. The integer at 'top' right now is
+10. With a 'pop', it will be removed from the stack.
+Let's do few more 'push'. I just pushed 7 and 5 onto the stack.
+At this stage, if I will call 'top' operation,
+it will return me number 5. 'IsEmpty'
+will return me false. At this stage,
+a 'pop' will remove 5 from the stack.
+As you can see the element, the integer which is coming last,
+is going out first, That's why we call stack 'last in first out' data structure.
+We can 'pop' till the stack gets empty.
+One more 'pop', and stack will be empty.
+So this pretty much is stack data structure. Now one obvious question can
+be
+what are the real scenarios where stack
+helps us. Let's list down some of the applications of stack.
+Stack data structure is used for execution of function calls in a program.
+We have talked about this quite a bit in our lessons on dynamic memory allocation
+and linked lists.
+We can also say that stack is used for recursion, because
+recursion is also a chain of function calls. It's just that,
+all the calls are to the same function. To know more about this application, you
+can
+check the description of this video, for a link to 'MyCodeSchool'
+lesson on dynamic memory allocation.
+Another application of stack is we can use it
+to implement undo operation,
+in an editor. We can perform undo operation in
+any text editor or image editor. Right now, I'm pressing 'Ctrl Z',
+and as you can see some of the text that I have written, is getting cleared.
+You can implement this using a stack.
+Stack is used in a number of important algorithms,
+like for example a compiler verifies whether
+parentheses in a source code are balanced or not
+using Stack data structure. Corresponding to
+each opening curly brace or opening parentheses in a source code, there
+must be
+a closing parentheses at appropriate position.
+And if parentheses in a source code are not put properly, if they're not balanced,
+compiler should throw error and this check can be performed using a stack.
+We will discuss some of these problems in detail in coming lessons.
+This much is good for an introduction. In our next lesson we will discuss
+implementation of stack. This is it for this lesson.
+Thanks for watching!!

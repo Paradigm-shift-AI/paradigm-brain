@@ -17,7 +17,7 @@ class Preprocess:
         Tokenid: string; ID of the plugin used.
     """
 
-    def __init__(self, text: str, tokenid: str = None):
+    def __init__(self, text: str, toeken_url: str = None, tokenid: str = None):
         """
         __init__
 
@@ -28,6 +28,7 @@ class Preprocess:
 
         self.text = text
         self.tokenid = tokenid
+        self.token_url = toeken_url
 
     def __process_text(self):
         self.results = {}
@@ -35,7 +36,7 @@ class Preprocess:
 
         if self.tokenid is not None:
             self.results["tag-intersection"] = RankRDF.RankRDF(
-                self.results["tag"], self.tokenid).get_tags_intersection()
+                self.results["tag"], self.token_url, self.tokenid).get_tags_intersection()
 
         self.results["processed-sentences"] = POSTag.GivePOSTags(
             Grammar.Grammar(

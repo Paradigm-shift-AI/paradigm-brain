@@ -14,13 +14,14 @@ class RankRDF:
         tokenid: String to uniquely identify the plugin
     """
 
-    def __init__(self, tags: list, tokenid : str):
+    def __init__(self, tags: list, toeken_url: str, tokenid : str):
         self.tokenid = tokenid
+        self.token_url = toeken_url
         self.tags = tags
         self.final_tags_intersection = []
 
     def __get_tags_from_plugin(self):
-        _make_request = requests.get(os.environ["PLUGIN_STORE_URL"] + self.tokenid)
+        _make_request = requests.get(self.token_url + self.tokenid)
 
         if _make_request.status_code == 200:
             self.list_from_plugin = _make_request.json()["tags"]
@@ -42,7 +43,7 @@ class RankRDF:
             if self.__binary_search(self.list_from_plugin, tag):
                 self.final_tags_intersection.append(tag)
 
-    def get_tags_intersection(self):
+    def get_tags_intersection(self, without_intersection = True):
         """
         get_tags_intersection
 
@@ -54,6 +55,10 @@ class RankRDF:
         """
 
         self.__get_tags_from_plugin()
+
+        if without_intersection:
+            return self.list_from_plugin
+
         self.__find_intersection()
 
         return self.final_tags_intersection

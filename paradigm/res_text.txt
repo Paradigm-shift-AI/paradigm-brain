@@ -1,8 +1,67 @@
-Kubernetes (/ˌk(j)uːbərˈnɛtɪs, -ˈneɪtɪs, -ˈneɪtiːz/, commonly stylized as K8s[4]) is an open-source container-orchestration system for automating computer application deployment, scaling, and management.[5]
-
-It was originally designed by Google and is now maintained by the Cloud Native Computing Foundation. It aims to provide a "platform for automating deployment, scaling, and operations of application containers across clusters of hosts".[6] It works with a range of container tools and runs containers in a cluster, often with images built using Docker. Kubernetes originally interfaced with the Docker runtime[7] through a "Dockershim"; however, the shim has since been deprecated in favor of directly interfacing with containerd or another CRI-compliant runtime.[8]
-
-Many cloud services offer a Kubernetes-based platform or infrastructure as a service (PaaS or IaaS) on which Kubernetes can be deployed as a platform-providing service. Many vendors also provide their own branded Kubernetes distributions.
-Kubernetes defines a set of building blocks ("primitives"), which collectively provide mechanisms that deploy, maintain, and scale applications based on CPU, memory[24] or custom metrics.[25] Kubernetes is loosely coupled and extensible to meet different workloads. This extensibility is provided in large part by the Kubernetes API, which is used by internal components as well as extensions and containers that run on Kubernetes.[26] The platform exerts its control over compute and storage resources by defining resources as Objects, which can then be managed as such.
-
-Kubernetes follows the primary/replica architecture. The components of Kubernetes can be divided into those that manage an individual node and those that are part of the control plane
+In this lesson we're going to introduce you to stack data structure.
+Data structures, as we know, are ways to store and organize data in computers.
+So far, in the series we have discussed some of the data structures.
+We have talked about arrays and linked lists.
+Now in this lesson we are going to talk about stacks and we are going to talk
+about
+stack as abstract data type or
+ADT. When we talk about a data structure as
+abstract data type, we talk only about the features
+or operations available with the data structure.
+We do not go into implementation details. So basically we define the data
+structured only as a mathematical or logical model.
+We'll go into implementation of stack in later lessons.
+In this lesson, we're going to talk only about stack
+ADT. So we are only going to have a look at the logical view
+of stack. Stack as a data structure in computer science is not very different
+from stack as a way of organizing objects,
+in real world. Here are some examples of stack from real world:
+First figure is of a stack of dinner plates.
+Second figure is of a mathematical puzzle, called
+tower of hanoi, where we have three rods or three pegs and multiple disks
+and the game is about moving a stack of discs,
+from one peg to another with this constraint that,
+a disc can not go on top of a smaller disc.
+Third figure is of a pack of Tennis balls.
+Stack basically is a collection with this property, that
+an item in the stack must be inserted or removed,
+from the same end that we call the top of stack.
+In fact this is not just a property, this is a constraint or restriction.
+Only the top of a stack is accessible and any item has to be inserted
+or removed from the top. A stack is also called
+'last in first out' collection. Most
+recently added item in a stack has to go out first.
+In the first example, you will always pick up a
+dinner plate from top of the stack and if you will have to put
+a plate back into the stack, you will always put it back on
+top of the stack. You can argue, that I can slip out a plate
+from in between without actually removing the plates on the top.
+So the constraint that I should take out a plate always from the top
+is not strictly enforced. For the sake of argument,
+this is fine. You can say this. In other two examples where we have
+discs in a pag, and tennis balls in this
+box that can open only from one side, there is no way you can take out an item
+from in between.
+Any insertion of removal has to happen from
+top.
+You can not slip out an item from in between. You can take out an item,
+but for that you will have to remove all the items on top of that item.
+Let's now formally define stack as an abstract data tape.
+A stack is a list or collection with the restriction that insertion
+and deletion can be performed only from one
+end, that we call the top of stack. Let's now define the interface or operations
+available with
+stack ADT. There are two fundamental operations available with a stack.
+An insertion is called a 'push' operation.
+'push' operation can insert or push some item
+'X' onto the stack. Another operation, second operation is
+called 'pop'. 'pop' is removing the
+most recent item from the stack, most recent element from the stack.
+'push' and 'pop' are the fundamental operations and
+there can be few more. Typically there is one operation called
+'top', that simply returns the element at top of the stack.
+And there can be an operation to check wheather
+a stack is empty or not. So this operation will
+return true if the stack is empty, false otherwise.
+So 'push' is inserting an element on top of stack
+and 'pop' is removing an element from top of stack.
