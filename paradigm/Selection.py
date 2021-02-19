@@ -57,12 +57,16 @@ class Selection:
                                 insert = False
                                 break
                         if insert:
+                            j["question"] = str(j["question"])
+                            j["answer"] = str(j["answer"])
                             self.final_question.append(j)
 
         else:
             for i in self.list_of_questions[type]:
                 for j in self.preprocessed_question["tag"][0:5]:
                     if j in i["question"]:
+                        j["question"] = str(j["question"])
+                        j["answer"] = str(j["answer"])
                         self.final_question.append(i)
 
 

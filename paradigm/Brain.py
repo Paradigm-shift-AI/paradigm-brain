@@ -1,6 +1,6 @@
-from Preprocessing import Preprocess
-from QuestionGeneration import TrueFlase, FillInTheBlanks, MultipleCorrect, IntergerType, SequenceRearrange
-import Selection
+from .Preprocessing import Preprocess
+from .QuestionGeneration import TrueFlase, FillInTheBlanks, MultipleCorrect, IntergerType, SequenceRearrange
+from . import Selection
 import json
 import random
 import os
